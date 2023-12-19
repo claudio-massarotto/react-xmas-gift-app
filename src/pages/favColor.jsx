@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 
-export default function FavColor() {
+export default function FavColor({handler}) {
   return (
     <FormControl className='form-control'>
       <FormLabel id="favourite-color" className='form-question'>Qual'è il tuo colore preferito?</FormLabel>
@@ -21,7 +21,7 @@ export default function FavColor() {
         <FormControlLabel value="altro" control={<Radio />} label="Nero" />
       </RadioGroup>
       
-      <Button className='next-step-button'>Vai alla prossima domanda</Button>
+      <Button className='next-step-button' onClick={handler}>Vai alla prossima domanda</Button>
     </FormControl>
   );
 }

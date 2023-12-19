@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 
-export default function BestActor() {
+export default function BestActor({handler}) {
   return (
     <FormControl className='form-control'>
       <FormLabel id="favourite-color" className='form-question'>Qual'è il tuo attore preferito?</FormLabel>
@@ -21,7 +21,7 @@ export default function BestActor() {
         <FormControlLabel value="altro" control={<Radio />} label="Vin Diesel" />
       </RadioGroup>
       
-      <Button className='next-step-button'>Vai alla prossima domanda</Button>
+      <Button className='next-step-button' onClick={handler}>Scopri il tuo regalo</Button>
     </FormControl>
   );
 }

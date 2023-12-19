@@ -6,7 +6,7 @@ import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 
-export default function BestActivity() {
+export default function BestActivity({handler}) {
   return (
     <FormControl className='form-control'>
       <FormLabel id="favourite-color" className='form-question'>Cosa preferisci fare?</FormLabel>
@@ -21,7 +21,7 @@ export default function BestActivity() {
         <FormControlLabel value="piscine" control={<Radio />} label="Fare immersioni" />
       </RadioGroup>
       
-      <Button className='next-step-button'>Vai alla prossima domanda</Button>
+      <Button className='next-step-button' onClick={handler}>Vai alla prossima domanda</Button>
     </FormControl>
   );
 }

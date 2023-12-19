@@ -6,7 +6,7 @@ import BestActivity from './pages/bestActivity';
 import BestTime from './pages/bestTime';
 import BestActor from './pages/bestActor';
 import { Button } from '@mui/material';
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 
 function App() {
@@ -16,21 +16,34 @@ function App() {
   const goSantaFn = () => {
     setToggleSanta(!toggleSanta);
   };
-  const handleQuestionsLogic = useCallback(() => {
+  const handleQuestionsLogic = () => {
     let toReturn;
     switch(question2answer){
-      case 0: toReturn = <BestActor />; break;
-      case 1: toReturn = <BestActor />; break;
-      case 2: toReturn = <BestActivity />; break;
-      case 3: toReturn = <BestTime />; break;
-      case 4: toReturn = <FavColor />; break;
-      default: toReturn = <FavColor />;
+      case 0: toReturn = <BestActor handler={nextStep} />; break;
+      case 1: toReturn = <BestActor handler={nextStep} />; break;
+      case 2: toReturn = <BestActivity handler={nextStep} />; break;
+      case 3: toReturn = <BestTime handler={nextStep} />; break;
+      case 4: toReturn = <FavColor handler={nextStep} />; break;
+      default: toReturn = <FavColor handler={nextStep} />;
     }
     let number = question2answer;
-    return { page: toReturn, number: number-- };
-  });
+    return { page: toReturn, number: --number };
+  };
 
-  useEffect(() => {handleQuestionsLogic()},[]);
+  const nextStep = () => {
+    console.log('next step');
+    const {page, number} = handleQuestionsLogic();
+    console.log(page, number);
+    setCurrentPage(page);
+    setQuestion2answer(number);
+  };
+
+  useEffect(() => {
+    const {page, number} = handleQuestionsLogic();
+    setCurrentPage(page);
+    setQuestion2answer(number);
+  }, []);
+
   return (
     <div className="App">
         <header className="App-header">
