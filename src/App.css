@@ -81,7 +81,7 @@
 
 .walking-claus.go-santa{
   animation-name: walkSanta;
-  animation-duration: 8s;
+  animation-duration: 4s;
   animation-iteration-count: 1;
   animation-fill-mode: backwards;
 }
