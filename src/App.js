@@ -7,6 +7,8 @@ import BestTime from './pages/bestTime';
 import BestActor from './pages/bestActor';
 import { Button } from '@mui/material';
 import { useEffect, useState } from 'react';
+import {useAnimate} from 'framer-motion';
+
 
 
 function App() {
@@ -18,12 +20,17 @@ function App() {
     setTimeout(()=>{
       setToggleSanta(state=>!state);
     },4000)
+
+    animate('img',{scale:[1, 3,3,1]},{duration: 2, transition:{times:[0,0.4,0.6,1]}})
   };
 
   const nextStep = () => {
     console.log('next step');
     setQuestion2answer(state=>state-1);
   };
+
+  
+  const [scope, animate] = useAnimate();
 
   return (
     <div className="App">
@@ -38,7 +45,9 @@ function App() {
             {question2answer === 4 && <FavColor handler={nextStep} />}
           </>
           <Button onClick={goSantaFn}>Test</Button>
-          <img src={santa} className={toggleSanta ? "walking-claus go-santa": "walking-claus"} alt="xmas-decoration" />
+          <div ref={scope}>
+          <img src={santa} className="walking-claus" alt="xmas-decoration" />
+          </div>
         </header>
     </div>
   );
