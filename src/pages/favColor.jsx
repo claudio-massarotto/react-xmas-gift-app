@@ -7,11 +7,11 @@ import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 
-export default function FavColor({handler}) {
+export default function FavColor({handler, answers}) {
   const [value, setValue] =useState(null);
-  const clickHandler =(valuesObject) =>{
+  const clickHandler =(event) =>{
     const newValues = {
-      ...valuesObject,
+      ...answers,
       4 : value,
     };
     handler(newValues);

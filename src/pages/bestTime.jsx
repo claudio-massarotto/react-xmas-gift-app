@@ -7,11 +7,11 @@ import FormLabel from '@mui/material/FormLabel';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 
-export default function BestTime({handler}) {
+export default function BestTime({handler,answers}) {
   const [value, setValue] =useState(null);
-  const clickHandler =(valuesObject) =>{
+  const clickHandler =() =>{
     const newValues = {
-      ...valuesObject,
+      ...answers,
       3 : value,
     };
     handler(newValues);

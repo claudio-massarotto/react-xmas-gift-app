@@ -5,7 +5,6 @@ import FavColor from './pages/favColor';
 import BestActivity from './pages/bestActivity';
 import BestTime from './pages/bestTime';
 import BestActor from './pages/bestActor';
-import { Button } from '@mui/material';
 import { useState } from 'react';
 import {useAnimate} from 'framer-motion';
 import Results from './pages/Results';
@@ -15,16 +14,14 @@ import Results from './pages/Results';
 function App() {
   const [question2answer, setQuestion2answer] = useState(4);
   const [pagesData, setPagesData] = useState({});
-  const goSantaFn = () => {
-    animate('img.walking-claus',{scale:[1, 6,6,1]},{duration: 2, transition:{times:[0,0.4,0.6,1]}})
-  };
 
-  const nextStep = (valuesObject) => {
-    console.log('next step');
+  const nextStep = (valuesObject, reset) => {
     setPagesData(valuesObject);
-    if(valuesObject[question2answer]){
+    if(valuesObject[question2answer] || reset){
       animate('img.walking-claus',{scale:[1, 6,6,1]},{duration: 2, transition:{times:[0,0.4,0.6,1]}})
-      setQuestion2answer(state=>state-1);
+      setTimeout(() =>{
+        setQuestion2answer(state=> reset ? 4 : state-1);
+      },900)
   }
   };
   
@@ -37,12 +34,11 @@ function App() {
           <label className='app-title'>Cosa riceverai per regalo?</label>
           <>
             {question2answer === 0 && !!pagesData[1] && <Results handler={nextStep} answers={pagesData} />}
-            {question2answer === 1 && !!pagesData[2] && <BestActor handler={nextStep} />}
-            {question2answer === 2 && !!pagesData[3] && <BestActivity handler={nextStep} />}
-            {question2answer === 3 && !!pagesData[4] && <BestTime handler={nextStep} />}
+            {question2answer === 1 && !!pagesData[2] && <BestActor handler={nextStep} answers={pagesData} />}
+            {question2answer === 2 && !!pagesData[3] && <BestActivity handler={nextStep} answers={pagesData} />}
+            {question2answer === 3 && !!pagesData[4] && <BestTime handler={nextStep} answers={pagesData} />}
             {question2answer === 4 && <FavColor handler={nextStep} />}
           </>
-          <Button onClick={goSantaFn}>Test</Button>
           <img src={santa} className="walking-claus" alt="xmas-decoration" />
         </header>
     </div>
